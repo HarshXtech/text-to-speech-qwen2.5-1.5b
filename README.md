@@ -17,7 +17,8 @@ Everything runs locally; no cloud services.
        ollama pull qwen2.5:1.5b
 
 2. Backend (from the project folder):
-       
+
+       cd backend
        python -m venv venv
        venv\Scripts\activate          (Mac/Linux: source venv/bin/activate)
        pip install -r requirements.txt
