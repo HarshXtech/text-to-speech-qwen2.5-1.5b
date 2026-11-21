@@ -13,7 +13,7 @@ from pydantic import BaseModel
 
 MODEL = "qwen2.5:1.5b"
 MAX_TOKENS = 120          # cap on reply length, keeps speech short
-HISTORY_TURNS = 10
+HISTORY_MESSAGES = 10
 VOICE_PATH = Path(__file__).parent / "voices" / "en_GB-alba-medium.onnx"
 
 SYSTEM_PROMPT = (
@@ -80,7 +80,7 @@ async def chat(req: ChatRequest):
         raise HTTPException(status_code=400, detail="Message is empty")
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    messages += [m.model_dump() for m in req.history[-HISTORY_TURNS:]]
+    messages += [m.model_dump() for m in req.history[-HISTORY_MESSAGES:]]
     messages.append({"role": "user", "content": req.message})
 
     try:
